@@ -728,6 +728,7 @@ ul { list-style: none; }
   .about__cards    { grid-template-columns: 1fr; }
   .image-frame     { width: 220px; height: 220px; }
   .float-badge     { display: none; }
+  .scroll-hint     { display: none; }
   .footer__inner   { flex-direction: column; text-align: center; }
   .exp__panel      { padding: 24px 20px; }
 }
