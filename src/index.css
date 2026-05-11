@@ -399,7 +399,6 @@ ul { list-style: none; }
   background: transparent;
 }
 .exp__tab:hover { background: var(--blue-50); border-color: var(--blue-100); }
-.exp__tab:focus { outline: none; }
 .exp__tab--active { background: var(--blue-50); border-color: var(--blue-300, #93C5FD); }
 .exp__tab-company { font-size: 14px; font-weight: 700; color: var(--slate-800); }
 .exp__tab--active .exp__tab-company { color: var(--blue-700); }
@@ -711,40 +710,9 @@ ul { list-style: none; }
   .hero__stats     { justify-content: center; }
   .about__grid     { grid-template-columns: 1fr; gap: 48px; }
   .exp__layout     { grid-template-columns: 1fr; }
-  .exp__tabs-wrap  {
-    position: relative;
-    overflow: hidden;
-  }
-  .exp__tabs-wrap::after {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 48px; height: 100%;
-    background: linear-gradient(to right, transparent, var(--slate-50));
-    pointer-events: none;
-  }
-  .exp__tabs {
-    flex-direction: row;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 4px 4px 12px;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
+  .exp__tabs       { flex-direction: row; overflow-x: auto; gap: 8px; scrollbar-width: none; }
   .exp__tabs::-webkit-scrollbar { display: none; }
-  .exp__tab {
-    flex-direction: column;
-    min-width: 160px;
-    scroll-snap-align: start;
-    flex-shrink: 0;
-    background: #fff;
-    border: 1.5px solid var(--slate-200);
-  }
-  .exp__tab--active {
-    background: var(--blue-50);
-    border-color: var(--blue-300);
-  }
+  .exp__tab        { flex-direction: column; min-width: 180px; }
   .projects__grid  { grid-template-columns: 1fr 1fr; }
   .project-card--featured { grid-column: span 2; }
   .edu__layout     { grid-template-columns: 1fr; }
