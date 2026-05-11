@@ -43,8 +43,12 @@ export default function Experience() {
                 </div>
               </div>
               <div className="exp__badge-group">
-                <span className="exp__period">{exp.period}</span>
-                {exp.current && <span className="badge badge--current">Current</span>}
+                <span className="exp__period">
+                  {exp.current
+                    ? exp.period.replace('Present', '')
+                    : exp.period}
+                  {exp.current && <span className="badge badge--current">Present</span>}
+                </span>
               </div>
             </div>
 
