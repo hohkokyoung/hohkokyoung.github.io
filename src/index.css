@@ -399,6 +399,7 @@ ul { list-style: none; }
   background: transparent;
 }
 .exp__tab:hover { background: var(--blue-50); border-color: var(--blue-100); }
+.exp__tab:focus { outline: none; }
 .exp__tab--active { background: var(--blue-50); border-color: var(--blue-300, #93C5FD); }
 .exp__tab-company { font-size: 14px; font-weight: 700; color: var(--slate-800); }
 .exp__tab--active .exp__tab-company { color: var(--blue-700); }
