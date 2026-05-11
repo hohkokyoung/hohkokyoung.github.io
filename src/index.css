@@ -737,13 +737,11 @@ ul { list-style: none; }
     min-width: 160px;
     scroll-snap-align: start;
     flex-shrink: 0;
-    background: #fff;
-    border: 1.5px solid var(--slate-200);
-    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    border: none;
   }
   .exp__tab--active {
-    border-color: var(--blue-300);
-    box-shadow: 0 4px 14px rgba(99,102,241,.15);
+    border: none;
+    background: var(--blue-50);
   }
   .projects__grid  { grid-template-columns: 1fr 1fr; }
   .project-card--featured { grid-column: span 2; }
