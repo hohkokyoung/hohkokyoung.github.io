@@ -98,7 +98,7 @@ export default function Hero() {
           <div className="image-frame">
             {!imgError ? (
               <img
-                src={`${import.meta.env.BASE_URL}DSCF1352.JPG`}
+                src={`${import.meta.env.BASE_URL}DSCF1352.jpg`}
                 alt="Hoh Kok Young"
                 className="profile-img"
                 onError={() => setImgError(true)}
