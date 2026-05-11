@@ -17,6 +17,7 @@ export default function Experience() {
 
         <div className={`exp__layout fade-up fade-up--delay-1 ${inView ? 'in-view' : ''}`}>
           {/* Sidebar tabs */}
+          <div className="exp__tabs-wrap">
           <div className="exp__tabs">
             {experiences.map((e, i) => (
               <button
@@ -29,6 +30,7 @@ export default function Experience() {
                 <span className="exp__tab-period">{e.period}</span>
               </button>
             ))}
+          </div>
           </div>
 
           {/* Content panel */}
