@@ -1,7 +1,7 @@
 import useInView from '../hooks/useInView'
 
 const channels = [
-  { label: 'Email',    val: 'kokyoung1520@gmail.com',      href: 'mailto:kokyoung1520@gmail.com', primary: true },
+  { label: 'Email',    val: 'kokyoung1520@gmail.com',      href: 'mailto:kokyoung1520@gmail.com' },
   { label: 'Phone',    val: '+65 9468 4462',               href: 'tel:+6594684462' },
   { label: 'LinkedIn', val: 'linkedin.com/in/hohkokyoung', href: 'https://www.linkedin.com/in/hohkokyoung/' },
   { label: 'GitHub',   val: 'github.com/hohkokyoung',      href: 'https://github.com/hohkokyoung' },
