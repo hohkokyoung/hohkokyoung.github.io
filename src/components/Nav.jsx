@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
 
-const links = ['About', 'Experience', 'Skills', 'Projects', 'Education', 'Contact']
+const links = ['Work', 'Projects', 'Skills', 'Education', 'Contact']
+const ID_MAP = { Work: 'experience', Projects: 'projects', Skills: 'skills', Education: 'education', Contact: 'contact' }
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('')
-  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -14,7 +14,7 @@ export default function Nav() {
   }, [])
 
   useEffect(() => {
-    const sections = links.map(l => document.getElementById(l.toLowerCase()))
+    const sections = Object.values(ID_MAP).map(id => document.getElementById(id))
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id) }),
       { rootMargin: '-40% 0px -55% 0px' }
@@ -26,24 +26,21 @@ export default function Nav() {
   return (
     <nav className={`nav${scrolled ? ' nav--scrolled' : ''}`}>
       <div className="nav__inner">
-        <a href="#" className="nav__logo">ky<span className="nav__dot">.</span></a>
-        <ul className={`nav__links${menuOpen ? ' nav__links--open' : ''}`}>
-          {links.map(l => (
-            <li key={l}>
-              <a
-                href={`#${l.toLowerCase()}`}
-                className={`nav__link${active === l.toLowerCase() ? ' nav__link--active' : ''}`}
-                onClick={() => setMenuOpen(false)}
-              >
-                {l}
-              </a>
-            </li>
-          ))}
+        <a href="#home" className="nav__mark">hky.</a>
+        <ul className="nav__links">
+          {links.map((l, i) => {
+            const id = ID_MAP[l]
+            return (
+              <li key={l}>
+                <a href={`#${id}`} className={`nav__link${active === id ? ' nav__link--active' : ''}`}>
+                  <span className="nav__link-n">{String(i + 1).padStart(2, '0')}</span>
+                  {l}
+                </a>
+              </li>
+            )
+          })}
         </ul>
-        <a href="mailto:kokyoung1520@gmail.com" className="btn btn--sm btn--primary nav__cta">Hire me</a>
-        <button className="nav__burger" onClick={() => setMenuOpen(o => !o)} aria-label="Menu">
-          <span /><span /><span />
-        </button>
+        <a href="mailto:kokyoung1520@gmail.com" className="nav__contact">Hire me</a>
       </div>
     </nav>
   )

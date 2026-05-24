@@ -10,57 +10,43 @@ export default function Experience() {
   return (
     <section className="section section--alt" id="experience" ref={ref}>
       <div className="container">
-        <div className={`fade-up ${inView ? 'in-view' : ''}`}>
-          <div className="section-label">Where I've worked</div>
-          <h2 className="section-title">Work <span className="gradient-text">experience</span></h2>
-        </div>
+        <header className={`section__head fade-up ${inView ? 'in-view' : ''}`}>
+          <span className="section-num">¶ 02</span>
+          <h2 className="section-title">Work history.</h2>
+        </header>
 
-        <div className={`exp__layout fade-up fade-up--delay-1 ${inView ? 'in-view' : ''}`}>
-          {/* Sidebar tabs */}
-          <div className="exp__tabs">
+        <div className={`exp fade-up fade-up--d1 ${inView ? 'in-view' : ''}`}>
+          <nav className="exp__nav">
             {experiences.map((e, i) => (
               <button
                 key={i}
-                className={`exp__tab ${active === i ? 'exp__tab--active' : ''}`}
+                className={`exp__tab ${active === i ? 'is-active' : ''}`}
                 onClick={() => setActive(i)}
               >
-                <span className="exp__tab-company">{e.company.split('(')[0].trim()}</span>
-                <span className="exp__tab-role">{e.role}</span>
-                <span className="exp__tab-period">{e.period}</span>
+                <span className="exp__tab-yr">{e.period.split(' ').slice(0, 2).join(' ')}</span>
+                <span className="exp__tab-co">{e.role}</span>
               </button>
             ))}
-          </div>
+          </nav>
 
-          {/* Content panel */}
-          <div className="exp__panel" key={active}>
-            <div className="exp__panel-header">
-              <div>
-                <h3 className="exp__role">{exp.role}</h3>
-                <div className="exp__meta">
-                  <span className="exp__company">{exp.company}</span>
-                  <span className="exp__sep">·</span>
-                  <span className="exp__location">{exp.location}</span>
-                </div>
-              </div>
-              <div className="exp__badge-group">
-                <span className="exp__period">
-                  {exp.current
-                    ? exp.period.replace('Present', '')
-                    : exp.period}
-                  {exp.current && <span className="badge badge--current">Present</span>}
-                </span>
-              </div>
-            </div>
+          <article className="exp__detail" key={active}>
+            <header className="exp__detail-head">
+              <h3 className="exp__role">{exp.role}</h3>
+              <p className="exp__co">{exp.company} · {exp.location}</p>
+              <p className="exp__period">
+                {exp.current ? <>{exp.period.split('–')[0].trim()} – <em>Current</em></> : exp.period}
+              </p>
+            </header>
 
-            <ul className="exp__highlights">
+            <ol className="exp__list">
               {exp.highlights.map((h, i) => (
-                <li key={i} className="exp__highlight" style={{ animationDelay: `${i * 60}ms` }}>
-                  <span className="exp__bullet" />
-                  {h}
+                <li key={i}>
+                  <span className="exp__list-n">{String(i + 1).padStart(2, '0')}</span>
+                  <span>{h}</span>
                 </li>
               ))}
-            </ul>
-          </div>
+            </ol>
+          </article>
         </div>
       </div>
     </section>

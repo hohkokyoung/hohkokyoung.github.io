@@ -7,68 +7,43 @@ export default function Education() {
   return (
     <section className="section" id="education" ref={ref}>
       <div className="container">
-        <div className={`fade-up ${inView ? 'in-view' : ''}`}>
-          <div className="section-label">Background</div>
-          <h2 className="section-title">Education & <span className="gradient-text">certifications</span></h2>
-        </div>
+        <header className={`section__head fade-up ${inView ? 'in-view' : ''}`}>
+          <span className="section-num">¶ 05</span>
+          <h2 className="section-title">Education &amp; credentials.</h2>
+        </header>
 
-        <div className="edu__layout">
-          {/* Education */}
-          <div className={`edu__col fade-left ${inView ? 'in-view' : ''}`}>
-            <h3 className="edu__col-title">🎓 Education</h3>
-            <div className="edu__list">
-              {education.map((e, i) => (
-                <div className="edu-card" key={i}>
-                  <div className="edu-card__school">{e.school}</div>
-                  <div className="edu-card__degree">{e.degree}</div>
-                  <div className="edu-card__major">Major: {e.major}</div>
-                  <div className="edu-card__footer">
-                    <div className="edu-card__meta">
-                      <span className="edu-card__gpa">GPA {e.gpa}</span>
-                      <span className="edu-card__period">{e.period}</span>
-                    </div>
-                    {e.honors.length > 0 && (
-                      <div className="edu-card__honors">
-                        {e.honors.map(h => (
-                          <span className="badge badge--gold" key={h}>🏆 {h}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+        <div className={`edu fade-up fade-up--d1 ${inView ? 'in-view' : ''}`}>
+          <div className="edu__col">
+            <h3 className="edu__col-hd">Academic</h3>
+            {education.map((e, i) => (
+              <article className="edu__entry" key={i}>
+                <h4 className="edu__school">{e.school}</h4>
+                <p className="edu__deg">{e.degree}</p>
+                <p className="edu__major">Major · {e.major}</p>
+                <p className="edu__meta">GPA {e.gpa} · {e.period}</p>
+                {e.honors.length > 0 && (
+                  <ul className="edu__honors">
+                    {e.honors.map(h => <li key={h}>{h}</li>)}
+                  </ul>
+                )}
+              </article>
+            ))}
           </div>
 
-          {/* Certifications */}
-          <div className={`edu__col fade-right ${inView ? 'in-view' : ''}`}>
-            <h3 className="edu__col-title">📜 Certifications</h3>
-            <div className="cert__list">
-              {certifications.map((c, i) => (
-                <div className="cert-card" key={i}>
-                  <div className="cert-card__icon" style={{ background: `${c.color}18`, color: c.color }}>
-                    {c.icon}
-                  </div>
-                  <div className="cert-card__body">
-                    <div className="cert-card__name">{c.name}</div>
-                    <div className="cert-card__level">{c.level}</div>
-                  </div>
-                  <div className="cert-card__year">{c.year}</div>
+          <div className="edu__col">
+            <h3 className="edu__col-hd">Certifications</h3>
+            {certifications.map((c, i) => (
+              <article className="cert" key={i}>
+                <span className="cert__yr">{c.year}</span>
+                <div>
+                  <p className="cert__name">{c.name}</p>
+                  <p className="cert__lvl">{c.level}</p>
                 </div>
-              ))}
-            </div>
+              </article>
+            ))}
 
-            <div className="interests-card">
-              <h4 className="interests-card__title">Outside of work</h4>
-              <div className="interests-card__items">
-                {[['📚', 'Reading'], ['💪', 'Workout'], ['🏊', 'Swimming'], ['🎮', 'Gaming']].map(([e, l]) => (
-                  <div className="interest-item" key={l}>
-                    <span>{e}</span>
-                    <span>{l}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <h3 className="edu__col-hd edu__col-hd--gap">Outside work</h3>
+            <p className="edu__off">Reading · Gym · Swimming · Gaming</p>
           </div>
         </div>
       </div>
