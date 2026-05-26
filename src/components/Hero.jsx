@@ -22,7 +22,7 @@ export default function Hero() {
           <p className="hero__sub">
             Singapore government portals managing land sales across the island.
             Payment systems processing hundreds of thousands. Multi-agent AI
-            pipelines built from scratch. Five years, all of it in production.
+            pipelines built from scratch. None of it a prototype.
           </p>
 
           <dl className="hero__meta">
