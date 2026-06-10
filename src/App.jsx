@@ -50,6 +50,23 @@ export default function App() {
     lenis.on('scroll', ScrollTrigger.update)
     gsap.ticker.add((time) => lenis.raf(time * 1000))
     gsap.ticker.lagSmoothing(0)
+
+    // Re-anchor to hash after layout settles (3D canvas / fonts / Lenis mount)
+    const hash = window.location.hash
+    if (hash) {
+      window.scrollTo({ top: 0 })
+      const target = document.querySelector(hash)
+      if (target) {
+        let attempts = 0
+        const tryScroll = () => {
+          attempts++
+          lenis.scrollTo(target, { offset: -80, immediate: attempts > 6 })
+          if (attempts < 8) setTimeout(tryScroll, 150)
+        }
+        setTimeout(tryScroll, 100)
+      }
+    }
+
     return () => lenis.destroy()
   }, [])
 

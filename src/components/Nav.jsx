@@ -27,9 +27,10 @@ export default function Nav() {
         <button
           type="button"
           aria-label="Scroll to top"
-          onClick={() =>
+          onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' })
-          }
+            history.replaceState(null, '', window.location.pathname + window.location.search)
+          }}
           className={`flex items-center gap-3 px-3 md:px-4 py-2 rounded-[11px] transition-[background-color,border-color] duration-300 cursor-pointer hover:bg-graphite-700/70 ${
             scrolled
               ? 'bg-graphite-700/55 border border-white/8'
