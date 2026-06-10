@@ -84,16 +84,26 @@ export default function Projects() {
                 }}
               >
                 <div>
-                  <h4 style={{ fontSize: isMobile ? '18px' : '20px', fontWeight: 400, letterSpacing: '-0.04em', color: 'var(--color-botanical-ink)', marginBottom: '8px' }}>{p.title}</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '8px' }}>
+                    <h4 style={{ fontSize: isMobile ? '18px' : '20px', fontWeight: 400, letterSpacing: '-0.04em', color: 'var(--color-botanical-ink)' }}>{p.title}</h4>
+                    {isMobile && (
+                      <div style={{ display: 'flex', gap: '12px', flexShrink: 0, paddingTop: '2px' }}>
+                        {p.github && <LinkBtn href={p.github}>↗</LinkBtn>}
+                        {p.live && <LinkBtn href={p.live}>↗</LinkBtn>}
+                      </div>
+                    )}
+                  </div>
                   <p style={{ fontSize: '14px', lineHeight: 1.6, letterSpacing: '-0.02em', color: 'var(--color-bark-brown)', maxWidth: '540px', marginBottom: '12px' }}>{p.desc}</p>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                     {p.tech.map((t) => <Tag key={t}>{t}</Tag>)}
                   </div>
                 </div>
-                <div style={{ display: 'flex', gap: '12px', paddingTop: isMobile ? '0' : '4px' }}>
-                  {p.github && <LinkBtn href={p.github}>↗</LinkBtn>}
-                  {p.live && <LinkBtn href={p.live}>↗</LinkBtn>}
-                </div>
+                {!isMobile && (
+                  <div style={{ display: 'flex', gap: '12px', paddingTop: '4px' }}>
+                    {p.github && <LinkBtn href={p.github}>↗</LinkBtn>}
+                    {p.live && <LinkBtn href={p.live}>↗</LinkBtn>}
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
