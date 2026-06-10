@@ -1,7 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import ThreeScene from './ThreeScene'
-import { scroll } from '../store/scroll'
 import { fadeUp, stagger } from '../lib/motion'
 import { useIsMobile } from '../hooks/useIsMobile'
 
@@ -16,12 +15,9 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   })
 
-  useEffect(() => {
-    return scrollYProgress.on('change', (v) => { scroll.progress = v })
-  }, [scrollYProgress])
-
-  const textY = useTransform(scrollYProgress, [0, 1], ['0%', isMobile ? '10%' : '20%'])
-  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  // Only fade — no Y parallax on mobile (fights native scroll compositor)
+  const textOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0])
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', isMobile ? '0%' : '18%'])
   const sceneOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
 
   return (
@@ -37,7 +33,7 @@ export default function Hero() {
         backgroundColor: 'var(--color-cream-paper)',
       }}
     >
-      {/* 3D canvas — full bg on mobile, right panel on desktop */}
+      {/* 3D canvas */}
       <motion.div
         style={{
           position: 'absolute',
@@ -52,7 +48,7 @@ export default function Hero() {
         <ThreeScene />
       </motion.div>
 
-      {/* Mobile: gradient overlay so text is readable over the 3D */}
+      {/* Mobile gradient overlay */}
       {isMobile && (
         <div style={{
           position: 'absolute', inset: 0, pointerEvents: 'none',
@@ -103,13 +99,7 @@ export default function Hero() {
           }}
         >
           {words.map((w, i) => (
-            <motion.span
-              key={i}
-              variants={fadeUp}
-              style={{ display: 'block' }}
-            >
-              {w}
-            </motion.span>
+            <motion.span key={i} variants={fadeUp} style={{ display: 'block' }}>{w}</motion.span>
           ))}
         </motion.h1>
 
@@ -155,9 +145,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.1 }}
         style={{
-          position: 'absolute',
-          bottom: '28px',
-          right: isMobile ? '24px' : '48px',
+          position: 'absolute', bottom: '28px', right: isMobile ? '24px' : '48px',
           display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
         }}
       >

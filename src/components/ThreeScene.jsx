@@ -1,7 +1,6 @@
 import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
-import { scroll } from '../store/scroll'
 
 const SMALL_COUNT = 52
 const HUB_COUNT = 8
@@ -62,7 +61,8 @@ function NetworkGraph() {
   }, [])
 
   useFrame((state) => {
-    const sp = scroll.progress
+    // Read scroll directly in the frame — no async pipeline, no lag
+    const sp = Math.min(Math.max(window.scrollY / window.innerHeight, 0), 1)
     const t = state.clock.elapsedTime
 
     groupRef.current.rotation.y = t * 0.1 + sp * 1.5
@@ -75,7 +75,6 @@ function NetworkGraph() {
       hubPointsRef.current.material.opacity = 0.6 + Math.sin(t * 0.9) * 0.15
     }
 
-    // Direct mapping — no lerp lag, scroll drives camera 1:1
     state.camera.position.z = 10 - sp * 7.5
   })
 
