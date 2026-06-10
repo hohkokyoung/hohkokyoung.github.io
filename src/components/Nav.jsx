@@ -24,8 +24,13 @@ export default function Nav() {
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex items-center justify-between gap-2">
-        <div
-          className={`flex items-center gap-3 px-3 md:px-4 py-2 rounded-[11px] transition-[background-color,border-color] duration-300 ${
+        <button
+          type="button"
+          aria-label="Scroll to top"
+          onClick={() =>
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }
+          className={`flex items-center gap-3 px-3 md:px-4 py-2 rounded-[11px] transition-[background-color,border-color] duration-300 cursor-pointer hover:bg-graphite-700/70 ${
             scrolled
               ? 'bg-graphite-700/55 border border-white/8'
               : 'bg-transparent border border-transparent'
@@ -36,7 +41,7 @@ export default function Nav() {
           <span className="text-mono text-[11px] md:text-[12px] text-snow tracking-wide">
             kokyoung<span className="text-slate-300">.dev</span>
           </span>
-        </div>
+        </button>
 
         <div className="hidden md:flex items-center gap-1 glass px-2 py-2">
           {links.map((l) => (
