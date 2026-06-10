@@ -20,7 +20,7 @@ export default function Hero() {
   }, [])
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-dvh overflow-hidden">
       <div className="absolute inset-0 atmosphere-blue pointer-events-none" />
       <div className="absolute inset-0 grid-bg opacity-30 md:opacity-40 pointer-events-none" />
 
@@ -30,7 +30,7 @@ export default function Hero() {
         </Suspense>
       </div>
 
-      <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-6 pt-28 md:pt-32 pb-24 min-h-screen flex flex-col justify-center">
+      <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-6 pt-28 md:pt-32 pb-24 min-h-dvh flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
