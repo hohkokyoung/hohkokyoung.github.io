@@ -121,7 +121,7 @@ export default function ThreeScene() {
   return (
     <Canvas
       camera={{ position: [0, 0, 10], fov: 50 }}
-      style={{ background: 'transparent', width: '100%', height: '100%' }}
+      style={{ background: '#111010', width: '100%', height: '100%' }}
       gl={{ alpha: true, antialias: true }}
     >
       <NetworkGraph />
