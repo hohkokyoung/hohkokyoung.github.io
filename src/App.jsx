@@ -51,20 +51,19 @@ export default function App() {
     gsap.ticker.add((time) => lenis.raf(time * 1000))
     gsap.ticker.lagSmoothing(0)
 
-    // Re-anchor to hash after layout settles (3D canvas / fonts / Lenis mount)
+    // Anchor to hash AFTER ScrollTrigger pins compute (they shift layout below them)
     const hash = window.location.hash
     if (hash) {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
       window.scrollTo({ top: 0 })
-      const target = document.querySelector(hash)
-      if (target) {
-        let attempts = 0
-        const tryScroll = () => {
-          attempts++
-          lenis.scrollTo(target, { offset: -80, immediate: attempts > 6 })
-          if (attempts < 8) setTimeout(tryScroll, 150)
-        }
-        setTimeout(tryScroll, 100)
-      }
+      const id = hash.slice(1)
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh()
+          const target = document.getElementById(id)
+          if (target) lenis.scrollTo(target, { offset: -80, immediate: true })
+        })
+      })
     }
 
     return () => lenis.destroy()
