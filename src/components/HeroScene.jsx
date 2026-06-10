@@ -1,7 +1,6 @@
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Float, Environment, MeshTransmissionMaterial } from '@react-three/drei'
+import { Float } from '@react-three/drei'
 import { useRef, useMemo } from 'react'
-import * as THREE from 'three'
 
 function KeyTile({ position, rotation, scale = 1, color = '#1b1c1e', speed = 1 }) {
   const ref = useRef()
@@ -14,14 +13,14 @@ function KeyTile({ position, rotation, scale = 1, color = '#1b1c1e', speed = 1 }
 
   return (
     <Float speed={1.5 * speed} rotationIntensity={0.6} floatIntensity={1.2}>
-      <mesh ref={ref} position={position} rotation={rotation} scale={scale} castShadow>
+      <mesh ref={ref} position={position} rotation={rotation} scale={scale}>
         <boxGeometry args={[1.2, 1.2, 0.28]} />
         <meshStandardMaterial
           color={color}
-          metalness={0.4}
-          roughness={0.35}
+          metalness={0.55}
+          roughness={0.3}
           emissive={color}
-          emissiveIntensity={0.05}
+          emissiveIntensity={0.12}
         />
       </mesh>
     </Float>
@@ -33,25 +32,25 @@ function Crystal({ position }) {
   useFrame((state) => {
     if (!ref.current) return
     const t = state.clock.getElapsedTime()
-    ref.current.rotation.x = t * 0.15
-    ref.current.rotation.y = t * 0.2
+    ref.current.rotation.x = t * 0.18
+    ref.current.rotation.y = t * 0.22
   })
   return (
     <Float speed={0.9} rotationIntensity={0.3} floatIntensity={0.8}>
       <mesh ref={ref} position={position}>
         <icosahedronGeometry args={[1.05, 0]} />
-        <MeshTransmissionMaterial
-          backside
-          samples={4}
-          thickness={0.6}
-          roughness={0.1}
-          transmission={1}
-          ior={1.4}
-          chromaticAberration={0.04}
+        <meshStandardMaterial
           color="#56c2ff"
-          attenuationColor="#7e57c2"
-          attenuationDistance={2}
+          metalness={0.85}
+          roughness={0.15}
+          emissive="#1e3a8a"
+          emissiveIntensity={0.35}
+          flatShading
         />
+      </mesh>
+      <mesh position={position} scale={1.12}>
+        <icosahedronGeometry args={[1.05, 0]} />
+        <meshBasicMaterial color="#7e57c2" wireframe transparent opacity={0.18} />
       </mesh>
     </Float>
   )
@@ -95,10 +94,11 @@ export default function HeroScene({ reduced = false }) {
       <color attach="background" args={['#040506']} />
       <fog attach="fog" args={['#040506', 8, 18]} />
 
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={1.2} />
-      <pointLight position={[-4, 2, 2]} intensity={1.5} color="#56c2ff" />
-      <pointLight position={[4, -2, 2]} intensity={1.5} color="#ff6363" />
+      <ambientLight intensity={0.35} />
+      <directionalLight position={[5, 5, 5]} intensity={1.4} />
+      <pointLight position={[-4, 2, 3]} intensity={2.2} color="#56c2ff" />
+      <pointLight position={[4, -2, 3]} intensity={2.2} color="#ff6363" />
+      <pointLight position={[0, 3, -2]} intensity={1.2} color="#7e57c2" />
 
       <ParticleField />
 
@@ -110,8 +110,6 @@ export default function HeroScene({ reduced = false }) {
       <KeyTile position={[2.6, -1.7, -1]} rotation={[-0.3, -0.5, 0.05]} color="#111214" speed={0.9} />
       <KeyTile position={[-4.5, 0.2, -2.5]} rotation={[0.2, 0.6, 0.3]} scale={0.7} color="#0d0e10" speed={0.7} />
       <KeyTile position={[4.4, -0.3, -2.5]} rotation={[-0.5, -0.3, -0.2]} scale={0.7} color="#0d0e10" speed={1.4} />
-
-      <Environment preset="city" />
     </Canvas>
   )
 }

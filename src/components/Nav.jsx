@@ -25,9 +25,12 @@ export default function Nav() {
     >
       <div className="max-w-[1200px] mx-auto px-4 md:px-6 flex items-center justify-between gap-2">
         <div
-          className={`flex items-center gap-3 px-3 md:px-4 py-2 transition-all ${
-            scrolled ? 'glass' : ''
+          className={`flex items-center gap-3 px-3 md:px-4 py-2 rounded-[11px] transition-[background-color,border-color] duration-300 ${
+            scrolled
+              ? 'bg-graphite-700/55 border border-white/8'
+              : 'bg-transparent border border-transparent'
           }`}
+          style={{ backdropFilter: scrolled ? 'blur(36px)' : 'none' }}
         >
           <div className="w-2 h-2 rounded-full bg-ember dot-pulse" />
           <span className="text-mono text-[11px] md:text-[12px] text-snow tracking-wide">
