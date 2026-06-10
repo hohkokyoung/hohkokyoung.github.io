@@ -61,31 +61,26 @@ function NetworkGraph() {
     }
   }, [])
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     const sp = scroll.progress
     const t = state.clock.elapsedTime
+    // Frame-rate independent lerp factor: same feel at 30fps, 60fps, 120fps
+    const f = 1 - Math.pow(0.001, delta)
 
-    // Steady rotation + scroll boost
     groupRef.current.rotation.y = t * 0.1 + sp * 1.5
     groupRef.current.rotation.x = Math.sin(t * 0.18) * 0.12 + sp * 0.35
 
-    // Connections breathe in opacity
     if (linesRef.current) {
       linesRef.current.material.opacity = 0.14 + Math.sin(t * 0.6) * 0.04
     }
-
-    // Hub nodes pulse slightly
     if (hubPointsRef.current) {
       hubPointsRef.current.material.opacity = 0.6 + Math.sin(t * 0.9) * 0.15
     }
 
-    // Camera zoom: far (z=10) → very close (z=2.5) as scroll increases
     const targetZ = 10 - sp * 7.5
-    state.camera.position.z += (targetZ - state.camera.position.z) * 0.04
-
-    // Gentle camera drift
-    state.camera.position.x += (sp * 0.5 - state.camera.position.x) * 0.025
-    state.camera.updateProjectionMatrix()
+    state.camera.position.z += (targetZ - state.camera.position.z) * f
+    state.camera.position.x += (sp * 0.5 - state.camera.position.x) * f
+    // updateProjectionMatrix() removed — not needed for position-only changes
   })
 
   return (

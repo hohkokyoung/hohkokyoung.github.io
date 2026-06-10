@@ -16,7 +16,7 @@ function Root() {
     // Ensure we're at top after mount too
     window.scrollTo(0, 0)
 
-    const lenis = new Lenis({ lerp: 0.075, smoothWheel: true })
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true })
     // Immediately snap to top before any smooth scroll kicks in
     lenis.scrollTo(0, { immediate: true })
 
