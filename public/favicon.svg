@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111214"/>
+      <stop offset="1" stop-color="#040506"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="48" cy="16" r="14" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ff6363" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ff6363" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#bg)" stroke="#363739" stroke-width="1"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="13.5" fill="none" stroke="#ffffff" stroke-opacity="0.06"/>
+
+  <circle cx="48" cy="16" r="14" fill="url(#glow)"/>
+  <circle cx="48" cy="16" r="4" fill="#ff6363"/>
+
+  <g fill="#ffedd7" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-weight="600">
+    <text x="32" y="44" font-size="34" text-anchor="middle" letter-spacing="-1">K</text>
+  </g>
+
+  <rect x="14" y="50" width="36" height="2" rx="1" fill="#ffffff" fill-opacity="0.12"/>
+</svg>
