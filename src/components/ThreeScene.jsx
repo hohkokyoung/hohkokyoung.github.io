@@ -61,11 +61,9 @@ function NetworkGraph() {
     }
   }, [])
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const sp = scroll.progress
     const t = state.clock.elapsedTime
-    // Frame-rate independent lerp factor: same feel at 30fps, 60fps, 120fps
-    const f = 1 - Math.pow(0.001, delta)
 
     groupRef.current.rotation.y = t * 0.1 + sp * 1.5
     groupRef.current.rotation.x = Math.sin(t * 0.18) * 0.12 + sp * 0.35
@@ -77,10 +75,8 @@ function NetworkGraph() {
       hubPointsRef.current.material.opacity = 0.6 + Math.sin(t * 0.9) * 0.15
     }
 
-    const targetZ = 10 - sp * 7.5
-    state.camera.position.z += (targetZ - state.camera.position.z) * f
-    state.camera.position.x += (sp * 0.5 - state.camera.position.x) * f
-    // updateProjectionMatrix() removed — not needed for position-only changes
+    // Direct mapping — no lerp lag, scroll drives camera 1:1
+    state.camera.position.z = 10 - sp * 7.5
   })
 
   return (
@@ -116,7 +112,7 @@ export default function ThreeScene() {
   return (
     <Canvas
       camera={{ position: [0, 0, 10], fov: 50 }}
-      style={{ width: '100%', height: '100%' }}
+      style={{ background: '#111010', width: '100%', height: '100%' }}
       gl={{ alpha: false, antialias: true }}
     >
       <color attach="background" args={['#111010']} />
