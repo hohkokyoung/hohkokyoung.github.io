@@ -27,9 +27,9 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
+      className="hero-full"
       style={{
         position: 'relative',
-        height: '100vh',
         minHeight: '600px',
         overflow: 'hidden',
         display: 'flex',

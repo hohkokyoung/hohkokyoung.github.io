@@ -21,6 +21,11 @@
 
 html { scroll-behavior: smooth; }
 
+.hero-full {
+  height: 100vh;
+  height: 100dvh;
+}
+
 body {
   margin: 0;
   background-color: var(--color-cream-paper);
