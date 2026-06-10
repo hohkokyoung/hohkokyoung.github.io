@@ -1,73 +1,173 @@
-import { useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import ThreeScene from './ThreeScene'
+import { scroll } from '../store/scroll'
+import { fadeUp, stagger } from '../lib/motion'
+import { useIsMobile } from '../hooks/useIsMobile'
+
+const words = ['Hoh', 'Kok', 'Young']
 
 export default function Hero() {
-  const [imgError, setImgError] = useState(false)
+  const sectionRef = useRef(null)
+  const isMobile = useIsMobile()
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  })
+
+  useEffect(() => {
+    return scrollYProgress.on('change', (v) => { scroll.progress = v })
+  }, [scrollYProgress])
+
+  const textY = useTransform(scrollYProgress, [0, 1], ['0%', isMobile ? '10%' : '20%'])
+  const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+  const sceneOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0])
 
   return (
-    <section className="hero" id="home">
-      <div className="container hero__inner">
-        <div className="hero__text">
-          <p className="hero__eyebrow">
-            <span>HOH KOK YOUNG</span>
-            <span className="hero__eyebrow-rule" />
-            <span>SINGAPORE · 2026</span>
-          </p>
+    <section
+      ref={sectionRef}
+      style={{
+        position: 'relative',
+        height: '100vh',
+        minHeight: '600px',
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'flex-end',
+        backgroundColor: 'var(--color-cream-paper)',
+      }}
+    >
+      {/* 3D canvas — full bg on mobile, right panel on desktop */}
+      <motion.div
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: isMobile ? '100%' : '65%',
+          height: '100%',
+          opacity: sceneOpacity,
+          pointerEvents: 'none',
+        }}
+      >
+        <ThreeScene />
+      </motion.div>
 
-          <h1 className="hero__headline">
-            Real systems.<br />
-            Real users.<br />
-            <em>Real stakes.</em>
-          </h1>
+      {/* Mobile: gradient overlay so text is readable over the 3D */}
+      {isMobile && (
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          background: 'linear-gradient(to right, rgba(17,16,16,0.92) 55%, rgba(17,16,16,0.1) 100%)',
+        }} />
+      )}
 
-          <p className="hero__sub">
-            Singapore government portals managing land sales across the island.
-            Payment systems processing hundreds of thousands. Multi-agent AI
-            pipelines built from scratch. None of it a prototype.
-          </p>
+      {/* Decorative ring — desktop only */}
+      {!isMobile && (
+        <div style={{
+          position: 'absolute', top: '10%', right: '10%',
+          width: '380px', height: '380px', borderRadius: '50%',
+          border: '1px solid var(--color-lichen)', pointerEvents: 'none', opacity: 0.5,
+        }} />
+      )}
 
-          <dl className="hero__meta">
-            <div><dt>Now</dt><dd>The Software Practice · Singapore</dd></div>
-            <div><dt>Focus</dt><dd>Full-stack · Cloud · Multi-agent AI</dd></div>
-            <div><dt>Stack</dt><dd>React · C# · Python · AWS</dd></div>
-          </dl>
+      {/* Hero text */}
+      <motion.div
+        style={{
+          position: 'relative', zIndex: 1,
+          padding: isMobile ? '0 24px 64px' : '0 48px 80px',
+          maxWidth: isMobile ? '100%' : '640px',
+          y: textY,
+          opacity: textOpacity,
+        }}
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="mono"
+          style={{ color: 'var(--color-bark-brown)', marginBottom: '20px' }}
+        >
+          Software Engineer — Singapore
+        </motion.p>
 
-          <div className="hero__cta">
-            <a href="#projects" className="btn-text">View the work <span>→</span></a>
-            <a href="mailto:kokyoung1520@gmail.com" className="btn-text btn-text--ghost">Say hello <span>→</span></a>
-          </div>
-        </div>
-
-        <div className="hero__portrait">
-          <figure className="portrait">
-            {!imgError ? (
-              <img
-                src={`${import.meta.env.BASE_URL}DSCF1352.JPG`}
-                alt="Hoh Kok Young"
-                onError={() => setImgError(true)}
-              />
-            ) : (
-              <div className="portrait__fallback">HKY</div>
-            )}
-            <figcaption>The author, Singapore.</figcaption>
-          </figure>
-        </div>
-      </div>
-
-      <div className="container">
-        <div className="hero__stats">
-          {[
-            ['5+', 'years shipping production software'],
-            ['100K+', 'records migrated, zero loss'],
-            ['60%', 'dev efficiency lift with agentic workflow'],
-            ['2', 'AWS certifications · Solutions Architect + Cloud Practitioner'],
-          ].map(([n, l]) => (
-            <div className="hstat" key={n}>
-              <span className="hstat__n">{n}</span>
-              <span className="hstat__l">{l}</span>
-            </div>
+        <motion.h1
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+          style={{
+            fontSize: isMobile ? 'clamp(52px, 14vw, 72px)' : 'clamp(56px, 7vw, 88px)',
+            lineHeight: 0.93,
+            letterSpacing: '-0.04em',
+            fontWeight: 400,
+            marginBottom: '28px',
+            color: 'var(--color-botanical-ink)',
+          }}
+        >
+          {words.map((w, i) => (
+            <motion.span
+              key={i}
+              variants={fadeUp}
+              style={{ display: 'block' }}
+            >
+              {w}
+            </motion.span>
           ))}
-        </div>
-      </div>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            fontSize: isMobile ? '16px' : '18px',
+            lineHeight: 1.6,
+            letterSpacing: '-0.03em',
+            color: 'var(--color-bark-brown)',
+            maxWidth: '380px',
+            marginBottom: '36px',
+          }}
+        >
+          Full-stack, AI systems, enterprise infrastructure.
+          Building things that hold at scale.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}
+        >
+          <a href="#work"
+            style={{ fontFamily: 'var(--font-primary)', fontSize: '14px', fontWeight: 700, letterSpacing: '-0.04em', color: 'var(--color-cream-paper)', background: 'var(--color-warm-loam)', borderRadius: '20px', padding: '12px 28px', display: 'inline-block', transition: 'background 0.2s ease' }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--color-forest-floor)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--color-warm-loam)')}
+          >View work</a>
+          <a href="mailto:kokyoung1520@gmail.com"
+            style={{ fontFamily: 'var(--font-primary)', fontSize: '14px', fontWeight: 700, letterSpacing: '-0.04em', color: 'var(--color-botanical-ink)', border: '1px solid var(--color-botanical-ink)', borderRadius: '20px', padding: '12px 28px', display: 'inline-block', transition: 'background 0.2s ease, color 0.2s ease' }}
+            onMouseEnter={(e) => { e.currentTarget.style.background = 'var(--color-botanical-ink)'; e.currentTarget.style.color = 'var(--color-cream-paper)' }}
+            onMouseLeave={(e) => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--color-botanical-ink)' }}
+          >Get in touch</a>
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll hint */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.1 }}
+        style={{
+          position: 'absolute',
+          bottom: '28px',
+          right: isMobile ? '24px' : '48px',
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px',
+        }}
+      >
+        <span className="mono" style={{ color: 'var(--color-eucalyptus)', fontSize: '11px' }}>scroll</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ width: '1px', height: '36px', background: 'var(--color-eucalyptus)' }}
+        />
+      </motion.div>
     </section>
   )
 }
