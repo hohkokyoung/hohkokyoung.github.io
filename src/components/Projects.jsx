@@ -84,19 +84,25 @@ export default function Projects() {
                 }}
               >
                 <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '12px', marginBottom: '8px' }}>
-                    <h4 style={{ fontSize: isMobile ? '18px' : '20px', fontWeight: 400, letterSpacing: '-0.04em', color: 'var(--color-botanical-ink)' }}>{p.title}</h4>
-                    {isMobile && (
-                      <div style={{ display: 'flex', gap: '12px', flexShrink: 0, paddingTop: '2px' }}>
-                        {p.github && <LinkBtn href={p.github}>↗</LinkBtn>}
-                        {p.live && <LinkBtn href={p.live}>↗</LinkBtn>}
-                      </div>
-                    )}
-                  </div>
+                  <h4 style={{ fontSize: isMobile ? '18px' : '20px', fontWeight: 400, letterSpacing: '-0.04em', color: 'var(--color-botanical-ink)', marginBottom: '8px' }}>{p.title}</h4>
                   <p style={{ fontSize: '14px', lineHeight: 1.6, letterSpacing: '-0.02em', color: 'var(--color-bark-brown)', maxWidth: '540px', marginBottom: '12px' }}>{p.desc}</p>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginBottom: (isMobile && (p.github || p.live)) ? '14px' : '0' }}>
                     {p.tech.map((t) => <Tag key={t}>{t}</Tag>)}
                   </div>
+                  {isMobile && (p.github || p.live) && (
+                    <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                      {p.github && (
+                        <a href={p.github} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.02em', color: 'var(--color-botanical-ink)', border: '1px solid var(--color-lichen)', borderRadius: '9999px', padding: '6px 14px', display: 'inline-block' }}>
+                          GitHub ↗
+                        </a>
+                      )}
+                      {p.live && (
+                        <a href={p.live} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.02em', color: 'var(--color-botanical-ink)', border: '1px solid var(--color-lichen)', borderRadius: '9999px', padding: '6px 14px', display: 'inline-block' }}>
+                          Live ↗
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
                 {!isMobile && (
                   <div style={{ display: 'flex', gap: '12px', paddingTop: '4px' }}>
