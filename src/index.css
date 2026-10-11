@@ -46,6 +46,13 @@ body {
   border-radius: 10px;
 }
 
+/* Rings are for keyboard users. Safari shows them after a tap when script
+   moves focus (e.g. a sheet focusing its close button), so hide them until
+   a key is pressed. */
+html[data-input='pointer'] :focus-visible { outline: none; }
+
+html { -webkit-tap-highlight-color: transparent; }
+
 h1, h2, h3 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
