@@ -109,7 +109,7 @@ export default function App() {
           </div>
         </div>
 
-        <div data-wheel-zone className="relative min-h-0 flex-1 overflow-hidden lg:h-dvh">
+        <div data-wheel-zone className="relative min-h-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0.5rem,#000_5rem)] lg:h-dvh lg:[mask-image:none]">
           <div
             className={`h-full transition-transform duration-700 ease-[var(--ease-out-expo)] ${
               isDesktop && projectOpen ? 'scale-[1.1]' : ''

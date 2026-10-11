@@ -24,11 +24,11 @@ export function IntroPanel({ onAbout, onContact, panel, hint }) {
         {profile.name}
         <span className="block text-ink-3">{profile.role}</span>
       </h1>
-      <p className="mt-6 max-w-[25rem] text-[1.0625rem] text-ink-2">
+      <p className="mt-3 max-w-[25rem] text-[0.9375rem] text-ink-2 lg:mt-6 lg:text-[1.0625rem]">
         I build AI that cites its sources, mobile apps with their rules in the database, and government systems
         that take real payments. Based in {profile.location}.
       </p>
-      <div className="mt-8 flex gap-2">
+      <div className="mt-4 flex gap-2 lg:mt-8">
         <button type="button" className="icon-btn" aria-label="About me" aria-pressed={panel === 'about'} onClick={onAbout}>
           <User width={19} height={19} />
         </button>
@@ -50,7 +50,7 @@ export function ProjectPanel({ item, onClose, onNext, nextTitle }) {
 
   return (
     <div className="swap-in" key={item.id}>
-      <div style={{ '--i': 0 }}>
+      <div className="hidden lg:block" style={{ '--i': 0 }}>
         <Back onClick={onClose} />
       </div>
       <p className="mt-6 text-[0.875rem] text-ink-2" style={{ '--i': 1 }}>
@@ -133,7 +133,7 @@ export function ProjectPanel({ item, onClose, onNext, nextTitle }) {
 export function AboutPanel({ onClose }) {
   return (
     <div className="swap-in">
-      <div style={{ '--i': 0 }}>
+      <div className="hidden lg:block" style={{ '--i': 0 }}>
         <Back onClick={onClose} label="Back" />
       </div>
       <div className="mt-6 flex items-center gap-4" style={{ '--i': 1 }}>
@@ -221,7 +221,7 @@ export function ContactPanel({ onClose }) {
 
   return (
     <div className="swap-in">
-      <div style={{ '--i': 0 }}>
+      <div className="hidden lg:block" style={{ '--i': 0 }}>
         <Back onClick={onClose} label="Back" />
       </div>
       <h2 className="mt-6 text-[clamp(1.75rem,2.6vw,2.25rem)] font-medium leading-[1.12] tracking-[-0.015em]" style={{ '--i': 1 }}>

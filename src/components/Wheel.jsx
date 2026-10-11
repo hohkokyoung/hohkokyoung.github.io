@@ -90,7 +90,7 @@ export default function Wheel({ items, index, onIndex, open, onOpen, paused = fa
 
   const paint = useCallback(() => {
     // Half the active card + half the scaled (0.8) neighbour = 0.9 of a card, plus a generous gap.
-    const gap = Math.min(200, Math.max(80, size.h * 0.16))
+    const gap = size.w < 640 ? Math.max(40, size.h * 0.09) : Math.min(200, Math.max(80, size.h * 0.16))
     const Y1 = cardHeight(size.card) * 0.9 + gap
     cardRefs.current.forEach((el, i) => {
       if (!el) return
@@ -103,7 +103,7 @@ export default function Wheel({ items, index, onIndex, open, onOpen, paused = fa
       el.style.setProperty('--wash', p.wash.toFixed(3))
       el.style.visibility = p.opacity <= 0.01 ? 'hidden' : 'visible'
     })
-  }, [size.h, n])
+  }, [size.w, size.h, n])
 
   const tick = useCallback(
     (now, last = now) => {
