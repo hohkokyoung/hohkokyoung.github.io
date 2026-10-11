@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { education, experiences, profile, skills } from '../data'
 import { diagrams } from './Diagrams'
 import Gallery from './Gallery'
@@ -17,7 +17,24 @@ function Back({ onClick, label = 'All work' }) {
   )
 }
 
+const portrait = { src: 'media/portrait-128.jpg', srcSet: 'media/portrait-128.jpg 2x, media/portrait-192.jpg 3x' }
+
 export function IntroPanel({ onAbout, onContact, panel, hint }) {
+  // Warm the cache once the page is idle, so the About photo is there the moment it opens.
+  useEffect(() => {
+    const warm = () => {
+      const img = new Image()
+      img.srcset = portrait.srcSet
+      img.src = portrait.src
+    }
+    if ('requestIdleCallback' in window) {
+      const id = requestIdleCallback(warm, { timeout: 3000 })
+      return () => cancelIdleCallback(id)
+    }
+    const id = setTimeout(warm, 1500)
+    return () => clearTimeout(id)
+  }, [])
+
   return (
     <div>
       <h1 className="text-[clamp(1.75rem,2.6vw,2.25rem)] font-medium leading-[1.12] tracking-[-0.015em]">
@@ -137,7 +154,7 @@ export function AboutPanel({ onClose }) {
         <Back onClick={onClose} label="Back" />
       </div>
       <div className="mt-6 flex items-center gap-4" style={{ '--i': 1 }}>
-        <img src="media/portrait.jpg" alt="" width="64" height="80" className="h-16 w-16 rounded-2xl object-cover object-top" />
+        <img {...portrait} alt="" width="64" height="64" className="h-16 w-16 rounded-2xl object-cover" />
         <div>
           <h2 className="text-[1.5rem] font-medium leading-tight">About</h2>
           <p className="text-[0.9375rem] text-ink-2">
