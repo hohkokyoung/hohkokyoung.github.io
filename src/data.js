@@ -13,11 +13,11 @@ export const work = [
   {
     id: 'pokerag',
     title: 'pokérag',
-    kind: 'Web app, AI retrieval',
+    kind: 'Web and mobile app, AI retrieval',
     year: '2026',
     tagline: 'A Pokédex with an assistant that cites its sources.',
     summary:
-      'Browse all 1,025 Pokémon, build and grade teams, run damage and catch-rate calculations, and ask questions in plain English. Every answer cites the records it came from, and says so when the data can’t answer.',
+      'Browse all 1,025 Pokémon, build and grade teams, run damage and catch-rate calculations, and ask questions in plain English, on the web or on iOS and Android. Every answer cites the records it came from, and says so when the data can’t answer.',
     highlights: [
       {
         title: 'Plans, not prompts',
@@ -40,11 +40,15 @@ export const work = [
         body: 'About 9,500 chunks, a profile per Pokémon plus every English dex entry, embedded locally with bge-small under an HNSW index. No embedding API.',
       },
       {
+        title: 'The whole site, on your phone',
+        body: 'A Flutter app for iOS and Android with the Pokédex, Teams and their coach, Ask and every tool. It reads from your own pokérag server, through an API client generated from the backend’s OpenAPI spec.',
+      },
+      {
         title: 'Coaches that ask first',
         body: 'The team coach and damage-calc coach run on the same agent. They can propose set changes and drafts, but writes are gated in code behind the user’s click.',
       },
     ],
-    stack: ['Next.js', 'React 19', 'FastAPI', 'PostgreSQL', 'pgvector', 'Claude API'],
+    stack: ['Next.js', 'React 19', 'Flutter', 'FastAPI', 'PostgreSQL', 'pgvector', 'Claude API'],
     links: [
       { label: 'Source', href: 'https://github.com/hohkokyoung/pokedex-rag' },
       { label: 'Full 2-minute tour', href: 'https://github.com/hohkokyoung/pokedex-rag/blob/main/docs/media/pokerag-tour.mp4' },
