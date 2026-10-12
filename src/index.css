@@ -135,6 +135,8 @@ p { text-wrap: pretty; }
 .sheet-backdrop { animation: fade-in 0.35s var(--ease-out) both; }
 .sheet-panel { animation: sheet-up 0.5s var(--ease-out-expo) both; }
 .sheet-panel { scrollbar-width: none; overscroll-behavior: contain; }
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 .sheet-panel::-webkit-scrollbar { display: none; }
 @keyframes fade-in { from { opacity: 0; } }
 @keyframes sheet-up { from { transform: translateY(100%); } }

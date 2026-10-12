@@ -8,7 +8,7 @@ export default function Gallery({ title, gallery }) {
 
   return (
     <div>
-      <ul className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2">
+      <ul className="no-scrollbar -mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2">
         {gallery.shots.map((s, i) => (
           <li key={s.src} className="shrink-0 snap-start">
             <button
@@ -18,7 +18,7 @@ export default function Gallery({ title, gallery }) {
               className="block overflow-hidden rounded-xl bg-surface ring-1 ring-line transition-opacity hover:opacity-85"
             >
               <img
-                src={s.src}
+                src={s.thumb ?? s.src}
                 alt=""
                 loading="lazy"
                 className={(s.device ?? gallery.device) === 'phone' ? 'h-48 w-auto' : 'h-32 w-auto'}
