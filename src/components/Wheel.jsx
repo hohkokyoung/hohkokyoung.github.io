@@ -34,6 +34,7 @@ function Media({ item, live, open }) {
     return (
       <VideoPlayer
         src={m.src}
+        hd={m.hd}
         poster={m.poster}
         label={`${item.title} demo video`}
         audio={m.audio}

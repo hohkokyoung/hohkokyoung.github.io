@@ -53,7 +53,7 @@ export const work = [
       { label: 'Source', href: 'https://github.com/hohkokyoung/pokedex-rag' },
       { label: 'Full 2-minute tour', href: 'https://github.com/hohkokyoung/pokedex-rag/blob/main/docs/media/pokerag-tour.mp4' },
     ],
-    media: { type: 'video', src: 'media/pokerag-promo.mp4', poster: 'media/pokerag-poster.jpg', audio: false },
+    media: { type: 'video', src: 'media/pokerag-promo.mp4', hd: 'media/pokerag-promo-hd.mp4', poster: 'media/pokerag-poster.jpg', audio: false },
     diagram: 'pokerag',
   },
   {
@@ -97,7 +97,7 @@ export const work = [
     stack: ['Flutter', 'Riverpod', 'FastAPI', 'Supabase', 'PostgreSQL', 'Redis', 'FCM'],
     links: [],
     note: 'Source is private. Happy to walk through it on a call.',
-    media: { type: 'video', src: 'media/snuggle-demo.mp4', poster: 'media/snuggle-poster.jpg', audio: true },
+    media: { type: 'video', src: 'media/snuggle-demo.mp4', hd: 'media/snuggle-demo-hd.mp4', poster: 'media/snuggle-poster.jpg', audio: true },
     gallery: {
       device: 'phone',
       shots: [

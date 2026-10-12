@@ -21,7 +21,7 @@ function SheetMedia({ item }) {
     <div className="mb-6 overflow-hidden rounded-2xl bg-surface ring-1 ring-black/[0.05]">
       <div className="aspect-video">
         {m.type === 'video' && (
-          <VideoPlayer src={m.src} poster={m.poster} label={`${item.title} demo video`} audio={m.audio} playing controls className="h-full w-full" />
+          <VideoPlayer src={m.src} hd={m.hd} poster={m.poster} label={`${item.title} demo video`} audio={m.audio} playing controls className="h-full w-full" />
         )}
         {m.type === 'image' && <img src={m.src} alt={m.alt} className="h-full w-full object-cover object-left-top" />}
         {m.type === 'visual' && (

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Pause, Play, VolumeOff, VolumeOn } from './Icons'
+import { Expand, Pause, Play, VolumeOff, VolumeOn } from './Icons'
+import VideoViewer from './VideoViewer'
 
 function formatTime(s) {
   if (!Number.isFinite(s)) return '0:00'
@@ -7,14 +8,16 @@ function formatTime(s) {
 }
 
 // Muted, looping video. Plays while `playing` is true unless the viewer paused it.
-// Controls appear only when `controls` is on (an opened card).
-export default function VideoPlayer({ src, poster, label, audio = false, playing = false, controls = false, className = '' }) {
+// Controls appear only when `controls` is on (an opened card). With `hd`, an expand
+// button opens the full-resolution file in a viewer.
+export default function VideoPlayer({ src, hd, poster, label, audio = false, playing = false, controls = false, className = '' }) {
   const videoRef = useRef(null)
   const userPaused = useRef(false)
   const [isPlaying, setIsPlaying] = useState(false)
   const [muted, setMuted] = useState(true)
   const [time, setTime] = useState(0)
   const [duration, setDuration] = useState(0)
+  const [expanded, setExpanded] = useState(null)
 
   useEffect(() => {
     const v = videoRef.current
@@ -48,6 +51,19 @@ export default function VideoPlayer({ src, poster, label, audio = false, playing
       userPaused.current = false
       v.play().catch(() => {})
     }
+  }
+
+  const expand = () => {
+    const v = videoRef.current
+    setExpanded({ start: v.currentTime, muted: v.muted, wasPlaying: !v.paused })
+    v.pause()
+  }
+
+  const collapse = (at) => {
+    const v = videoRef.current
+    v.currentTime = at
+    if (expanded?.wasPlaying) v.play().catch(() => {})
+    setExpanded(null)
   }
 
   const seekTo = (ratio) => {
@@ -93,16 +109,28 @@ export default function VideoPlayer({ src, poster, label, audio = false, playing
               {formatTime(time)} / {formatTime(duration)}
             </span>
           </div>
-          {audio && (
-            <button
-              type="button"
-              onClick={toggleSound}
-              aria-label={muted ? 'Turn sound on' : 'Turn sound off'}
-              className="pointer-events-auto absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-ink shadow-[0_1px_3px_oklch(0_0_0/0.15)] backdrop-blur transition-transform hover:scale-105"
-            >
-              {muted ? <VolumeOff width={14} height={14} /> : <VolumeOn width={14} height={14} />}
-            </button>
-          )}
+          <div className="pointer-events-auto absolute bottom-3 right-3 flex items-center gap-1.5">
+            {audio && (
+              <button
+                type="button"
+                onClick={toggleSound}
+                aria-label={muted ? 'Turn sound on' : 'Turn sound off'}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-ink shadow-[0_1px_3px_oklch(0_0_0/0.15)] backdrop-blur transition-transform hover:scale-105"
+              >
+                {muted ? <VolumeOff width={14} height={14} /> : <VolumeOn width={14} height={14} />}
+              </button>
+            )}
+            {hd && (
+              <button
+                type="button"
+                onClick={expand}
+                aria-label={`Expand ${label} to full resolution`}
+                className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-ink shadow-[0_1px_3px_oklch(0_0_0/0.15)] backdrop-blur transition-transform hover:scale-105"
+              >
+                <Expand width={14} height={14} />
+              </button>
+            )}
+          </div>
           <div
             role="slider"
             tabIndex={0}
@@ -127,6 +155,10 @@ export default function VideoPlayer({ src, poster, label, audio = false, playing
             </div>
           </div>
         </div>
+      )}
+
+      {expanded && (
+        <VideoViewer src={hd} poster={poster} label={label} start={expanded.start} muted={expanded.muted} onClose={collapse} />
       )}
     </div>
   )

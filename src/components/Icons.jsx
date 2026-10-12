@@ -3,6 +3,9 @@ const base = { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke
 export const ArrowUpRight = (p) => (
   <svg {...base} {...p}><path d="M7 17 17 7M8 7h9v9" /></svg>
 )
+export const Expand = (p) => (
+  <svg {...base} {...p}><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7" /></svg>
+)
 export const ArrowRight = (p) => (
   <svg {...base} {...p}><path d="M5 12h14M13 6l6 6-6 6" /></svg>
 )
