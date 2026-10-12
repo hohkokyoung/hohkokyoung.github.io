@@ -5,7 +5,6 @@ import { ArrowLeft, ArrowRight, Close } from './Icons'
 // A row of screenshots in the project panel. Click one to view it full size.
 export default function Gallery({ title, gallery }) {
   const [open, setOpen] = useState(null)
-  const phone = gallery.device === 'phone'
 
   return (
     <div>
@@ -22,7 +21,7 @@ export default function Gallery({ title, gallery }) {
                 src={s.src}
                 alt=""
                 loading="lazy"
-                className={phone ? 'h-48 w-auto' : 'h-32 w-auto'}
+                className={(s.device ?? gallery.device) === 'phone' ? 'h-48 w-auto' : 'h-32 w-auto'}
               />
             </button>
           </li>

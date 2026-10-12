@@ -54,6 +54,19 @@ export const work = [
       { label: 'Full 2-minute tour', href: 'https://github.com/hohkokyoung/pokedex-rag/blob/main/docs/media/pokerag-tour.mp4' },
     ],
     media: { type: 'video', src: 'media/pokerag-promo.mp4', hd: 'media/pokerag-promo-hd.mp4', poster: 'media/pokerag-poster.jpg', audio: false },
+    gallery: {
+      device: 'desktop',
+      shots: [
+        { src: 'media/pokerag-web-home.jpg', caption: 'Home: team coach, damage calculator and lookups' },
+        { src: 'media/pokerag-web-ask.jpg', caption: 'Ask: an answer with its citations' },
+        { src: 'media/pokerag-web-garchomp.jpg', caption: 'A Pokémon’s detail page' },
+        { src: 'media/pokerag-web-pokedex.jpg', caption: 'The Pokédex, all 1,025 species' },
+        { src: 'media/pokerag-web-team.jpg', caption: 'A team with its coach and rating' },
+        { src: 'media/pokerag-app-pokedex.jpg', caption: 'The Pokédex on iPhone', device: 'phone' },
+        { src: 'media/pokerag-app-garchomp.jpg', caption: 'Garchomp on iPhone', device: 'phone' },
+        { src: 'media/pokerag-app-team.jpg', caption: 'A team’s report on iPhone', device: 'phone' },
+      ],
+    },
     diagram: 'pokerag',
   },
   {
