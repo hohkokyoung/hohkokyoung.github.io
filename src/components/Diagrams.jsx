@@ -51,4 +51,17 @@ export function SnuggleDiagram() {
   )
 }
 
-export const diagrams = { pokerag: PokeragDiagram, snuggle: SnuggleDiagram }
+export function TerraprevDiagram() {
+  return (
+    <Flow caption="Everything runs locally. The only network call is downloading AWS’s public price lists.">
+      <Step title="terraform apply">A wrapper runs the real command, then rebuilds whenever state may have changed.</Step>
+      <Step title="Read state">Parse terraform.tfstate, strip sensitive values, and build the graph: VPCs, subnets, resources and the traffic between them.</Step>
+      <Step title="Price">Map each resource to AWS Price List SKUs. Always-on costs from state, usage costs from sliders, the Always Free tier applied account-wide.</Step>
+      <Step title="Snapshot and brief" accent>
+        One self-contained HTML page with the diagram and costs, plus a diagram PDF and a CTO brief with rule-based findings.
+      </Step>
+    </Flow>
+  )
+}
+
+export const diagrams = { pokerag: PokeragDiagram, snuggle: SnuggleDiagram, terraprev: TerraprevDiagram }

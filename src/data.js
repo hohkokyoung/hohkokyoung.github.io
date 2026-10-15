@@ -11,6 +11,63 @@ export const profile = {
 // The wheel, in order. `media` is what the card shows.
 export const work = [
   {
+    id: 'terraprev',
+    title: 'terraprev',
+    kind: 'Developer tool, infrastructure',
+    year: '2026',
+    tagline: 'See a Terraform stack’s architecture and AWS cost, every time you apply.',
+    summary:
+      'Point it at a terraform.tfstate and it draws the architecture, estimates the monthly AWS bill line by line from AWS’s own price list, and writes a brief for a CTO. It runs locally with no AWS account or credentials, and works with emulators like LocalStack.',
+    highlights: [
+      {
+        title: 'Diagrams from real relationships',
+        body: 'Arrows come from the state itself: load balancer targets, SQS triggers, SNS subscriptions and security-group rules. ELK lays out cloud, VPC and subnets automatically.',
+      },
+      {
+        title: 'Every dollar explained',
+        body: 'Prices come from the AWS Price List API, filtered while streaming and cached, about 330 MB down to 3.5 MB. Each line shows quantity × unit price with its SKU. Anything unpriced is listed, never counted as $0.',
+      },
+      {
+        title: 'Usage you can tune',
+        body: 'Always-on costs come from state. Usage charges like Lambda invocations or NAT data are sliders, and the AWS Always Free tier is shared across the account like a real bill.',
+      },
+      {
+        title: 'Trace what can reach it',
+        body: 'Pick a resource and every path to it lights up, like Internet → ALB → ASG → RDS. IAM roles and security groups are explained in plain English.',
+      },
+      {
+        title: 'A brief, not just a chart',
+        body: 'Executive summary, cost drivers, rule-based findings with fixes (backups, encryption, IMDSv1, open ports) and security posture, as Markdown with a Mermaid diagram or PDF.',
+      },
+      {
+        title: 'Private and deterministic',
+        body: 'Values Terraform marks sensitive never reach the page. The same state and prices give byte-identical Markdown and PDF on any machine.',
+      },
+      {
+        title: 'Always current',
+        body: 'A terraform wrapper rebuilds the snapshot on every apply, and live mode pushes changes to the page over SSE within a second.',
+      },
+    ],
+    stack: ['TypeScript', 'React', 'React Flow', 'ELK', 'Hono', 'Node.js', 'AWS Price List API'],
+    links: [{ label: 'Source', href: 'https://github.com/hohkokyoung/terraprev' }],
+    media: { type: 'video', src: 'media/terraprev-promo.mp4', hd: 'media/terraprev-promo-hd.mp4', poster: 'media/terraprev-poster.jpg', audio: false },
+    gallery: {
+      device: 'desktop',
+      shots: [
+        { src: 'media/terraprev-overview.jpg', thumb: 'media/terraprev-overview-thumb.jpg', caption: 'The diagram and the monthly cost by category' },
+        { src: 'media/terraprev-select.jpg', thumb: 'media/terraprev-select-thumb.jpg', caption: 'A resource’s cost, line by line' },
+        { src: 'media/terraprev-usage.jpg', thumb: 'media/terraprev-usage-thumb.jpg', caption: 'Usage sliders move the total' },
+        { src: 'media/terraprev-flow.jpg', thumb: 'media/terraprev-flow-thumb.jpg', caption: 'Data flow: everything that can reach the app tier' },
+        { src: 'media/terraprev-access.jpg', thumb: 'media/terraprev-access-thumb.jpg', caption: 'A Lambda’s IAM role drawn on the diagram' },
+        { src: 'media/terraprev-report.jpg', thumb: 'media/terraprev-report-thumb.jpg', caption: 'The CTO brief' },
+        { src: 'media/terraprev-report-cost.jpg', thumb: 'media/terraprev-report-cost-thumb.jpg', caption: 'What drives the bill' },
+        { src: 'media/terraprev-findings.jpg', thumb: 'media/terraprev-findings-thumb.jpg', caption: 'Findings, each with a fix' },
+        { src: 'media/terraprev-dark.jpg', thumb: 'media/terraprev-dark-thumb.jpg', caption: 'Dark mode' },
+      ],
+    },
+    diagram: 'terraprev',
+  },
+  {
     id: 'pokerag',
     title: 'pokérag',
     kind: 'Web and mobile app, AI retrieval',
