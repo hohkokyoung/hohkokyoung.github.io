@@ -110,7 +110,7 @@ export const work = [
       { label: 'Source', href: 'https://github.com/hohkokyoung/pokedex-rag' },
       { label: 'Full 2-minute tour', href: 'https://github.com/hohkokyoung/pokedex-rag/blob/main/docs/media/pokerag-tour.mp4' },
     ],
-    media: { type: 'video', src: 'media/pokerag-promo.mp4', hd: 'media/pokerag-promo-hd.mp4', poster: 'media/pokerag-poster.jpg', audio: false },
+    media: { type: 'video', src: 'media/pokerag-promo.mp4', hd: 'media/pokerag-promo-hd.mp4', poster: 'media/pokerag-poster.jpg', audio: true },
     gallery: {
       device: 'desktop',
       shots: [
