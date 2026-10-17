@@ -1,0 +1,31 @@
+/* The wheel's keyboard figure. Neutral greys on the page background, so it sits on the site without a card. */
+.iso.kb-figure[data-theme='light'] {
+  --anatomy-paper: var(--bg);
+  --anatomy-card: var(--bg);
+  --anatomy-face: #fff;
+  --anatomy-top: #fff;
+  --anatomy-lit-top: #fff;
+  --anatomy-shade-0: #d9d9d9;
+  --anatomy-shade-1: #e2e2e2;
+  --anatomy-shade-2: #eaeaea;
+  --anatomy-shade-3: #f1f1f1;
+  --anatomy-lit-shade: #ececec;
+  --anatomy-halo: #808080;
+  --anatomy-halo-opacity: 0.28;
+  --ks-glass: #232326;
+  --ks-ink: #f4f4f2;
+}
+/* No entrance animation: inside the masked column, any animation on the figure
+   puts it on its own layer and Chrome composites it washed out. */
+
+.kb-figure .ks-glass { fill: var(--ks-glass); stroke: none; }
+.kb-figure .ks-floor { fill: var(--anatomy-shade-0); stroke: none; }
+.kb-figure .ks-oled { fill: var(--ks-ink); font-family: var(--anatomy-mono); letter-spacing: 0.04em; }
+.kb-figure .ks-oled-dim { opacity: 0.55; }
+.kb-figure .ks-key[data-on] > .iso-solid > .iso-top { fill: var(--anatomy-lit-top); }
+.kb-figure .ks-key[data-on] > .iso-solid .iso-edge,
+.kb-figure .ks-key[data-on] > .iso-line { stroke: var(--anatomy-lit); }
+.kb-figure .ks-key[data-on] > .iso-solid .iso-shade { fill: var(--anatomy-lit-shade); }
+.kb-figure .ks-cord { stroke-width: 1.1px; }
+.kb-figure .ks-key { cursor: pointer; }
+

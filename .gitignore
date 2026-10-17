@@ -4,3 +4,6 @@ dist
 *.local
 .vite
 .playwright-mcp
+
+# Keyboard figure review captures
+figures/*/shots/

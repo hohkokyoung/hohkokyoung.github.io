@@ -117,14 +117,16 @@ p { text-wrap: pretty; }
     transition: text-decoration-color 0.2s;
   }
   .text-link:hover { text-decoration-color: var(--ink); }
+}
 
-  /* Fade the top and bottom of scrollable panels */
-  .scroll-fade {
-    mask-image: linear-gradient(to bottom, transparent 0, #000 2rem, #000 calc(100% - 2.5rem), transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 2rem, #000 calc(100% - 2.5rem), transparent 100%);
-    scrollbar-width: none;
-  }
-  .scroll-fade::-webkit-scrollbar { display: none; }
+/* Fade the top and bottom of scrollable panels. The native scrollbar is
+   hidden: ScrollIndicator draws a short one instead.
+   An @utility (not a component class) so variants like lg: apply. */
+@utility scroll-fade {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 2rem, #000 calc(100% - 2.5rem), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 2rem, #000 calc(100% - 2.5rem), transparent 100%);
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

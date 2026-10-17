@@ -19,7 +19,7 @@ function Back({ onClick, label = 'All work' }) {
 
 const portrait = { src: 'media/portrait-128.jpg', srcSet: 'media/portrait-128.jpg 2x, media/portrait-192.jpg 3x' }
 
-export function IntroPanel({ onAbout, onContact, panel, hint }) {
+export function IntroPanel({ onAbout, onContact, panel, hint, figure }) {
   // Warm the cache once the page is idle, so the About photo is there the moment it opens.
   useEffect(() => {
     const warm = () => {
@@ -37,6 +37,7 @@ export function IntroPanel({ onAbout, onContact, panel, hint }) {
 
   return (
     <div>
+      {figure}
       <h1 className="text-[clamp(1.75rem,2.6vw,2.25rem)] font-medium leading-[1.12] tracking-[-0.015em]">
         {profile.name}
         <span className="block text-ink-3">{profile.role}</span>

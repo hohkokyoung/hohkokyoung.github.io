@@ -1,11 +1,15 @@
-import { useCallback, useEffect, useState } from 'react'
+import { Suspense, lazy, useCallback, useEffect, useRef, useState } from 'react'
 import { work } from './data'
 import Wheel from './components/Wheel'
 import Sheet from './components/Sheet'
 import VideoPlayer from './components/VideoPlayer'
 import CardVisual from './components/CardVisual'
+import ScrollIndicator from './components/ScrollIndicator'
 import { AboutPanel, ContactPanel, IntroPanel, ProjectPanel } from './components/Panels'
 import useMediaQuery from './lib/useMediaQuery'
+
+// Desktop only, and loaded after first paint: the drawing is about 67 KB gzipped.
+const Keyboard = lazy(() => import('./components/Keyboard'))
 
 function fromHash() {
   const h = window.location.hash.slice(1)
@@ -35,6 +39,7 @@ function SheetMedia({ item }) {
 export default function App() {
   const [{ index, panel }, setState] = useState(fromHash)
   const isDesktop = useMediaQuery('(min-width: 1024px)')
+  const scrollRef = useRef(null)
   const item = work[index]
 
   const setIndex = useCallback((i) => setState((s) => ({ ...s, index: i })), [])
@@ -62,11 +67,11 @@ export default function App() {
     const onKey = (e) => {
       if (e.target.closest?.('[role="slider"], input, textarea')) return
       if (e.key === 'Escape' && panel !== 'intro') close()
-      if (['ArrowDown', 'PageDown', 'j'].includes(e.key)) {
+      if (['ArrowDown', 'PageDown'].includes(e.key)) {
         e.preventDefault()
         step(1)
       }
-      if (['ArrowUp', 'PageUp', 'k'].includes(e.key)) {
+      if (['ArrowUp', 'PageUp'].includes(e.key)) {
         e.preventDefault()
         step(-1)
       }
@@ -92,6 +97,7 @@ export default function App() {
     <>
       <main className="flex h-dvh flex-col overflow-hidden lg:grid lg:grid-cols-[minmax(26rem,44%)_1fr]">
         <div
+          ref={scrollRef}
           data-scroll
           className="relative z-10 flex shrink-0 px-5 pb-1 pt-[max(1.5rem,env(safe-area-inset-top))] lg:scroll-fade lg:h-dvh lg:overflow-y-auto lg:px-[clamp(2.5rem,8vw,9rem)] lg:py-0"
         >
@@ -104,10 +110,23 @@ export default function App() {
                 onAbout={() => toggle('about')}
                 onContact={() => toggle('contact')}
                 hint="Scroll over the cards to browse. Click one for the details."
+                figure={
+                  isDesktop && (
+                    // Space reserved at the drawing's aspect, so nothing shifts when it loads.
+                    // The negative margin lines the keyboard's edge up with the name's.
+                    <div className="mb-6 -ml-[15px] aspect-[600/324] w-[17.5rem]">
+                      <Suspense fallback={null}>
+                        <Keyboard index={index} count={work.length} />
+                      </Suspense>
+                    </div>
+                  )
+                }
               />
             )}
+
           </div>
         </div>
+        {isDesktop && <ScrollIndicator target={scrollRef} />}
 
         <div data-wheel-zone className="relative min-h-0 flex-1 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent_0.5rem,#000_5rem)] lg:h-dvh lg:[mask-image:none]">
           <div
