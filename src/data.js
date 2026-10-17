@@ -17,38 +17,38 @@ export const work = [
     year: '2026',
     tagline: 'See a Terraform stack’s architecture and AWS cost, every time you apply.',
     summary:
-      'Point it at a terraform.tfstate and it draws the architecture, estimates the monthly AWS bill line by line from AWS’s own price list, and writes a brief for a CTO. It runs locally with no AWS account or credentials, and works with emulators like LocalStack.',
+      'Point it at a terraform.tfstate, or at a plan before you apply it, and it draws the architecture, estimates the monthly AWS bill line by line from AWS’s own price list, and writes a brief for a CTO. It previews what a plan does to the bill, compares two stacks, and answers an AI assistant’s questions over MCP. It runs locally with no AWS account or credentials, and works with emulators like LocalStack.',
     highlights: [
       {
         title: 'Diagrams from real relationships',
-        body: 'Arrows come from the state itself: load balancer targets, SQS triggers, SNS subscriptions and security-group rules. ELK lays out cloud, VPC and subnets automatically.',
+        body: 'Arrows come from the state itself: load balancer targets, SQS triggers, SNS subscriptions and security-group rules, laid out by ELK. Pick a resource and every path to it lights up, like Internet → ALB → ASG → RDS.',
       },
       {
         title: 'Every dollar explained',
-        body: 'Prices come from the AWS Price List API, filtered while streaming and cached, about 330 MB down to 3.5 MB. Each line shows quantity × unit price with its SKU. Anything unpriced is listed, never counted as $0.',
+        body: 'Prices come from the AWS Price List API, filtered while streaming and cached, about 330 MB down to 3.5 MB. Each line shows quantity × unit price with its SKU, usage charges are sliders, and anything unpriced is listed, never counted as $0.',
       },
       {
-        title: 'Usage you can tune',
-        body: 'Always-on costs come from state. Usage charges like Lambda invocations or NAT data are sliders, and the AWS Always Free tier is shared across the account like a real bill.',
+        title: 'Preview a plan before applying it',
+        body: 'Reads terraform show -json and marks what will be added, changed, replaced or destroyed, each with its monthly cost change. New resources have no ids yet, so their connections are traced through the plan’s references, module outputs and inputs. Tested against real Terraform 1.16 output.',
       },
       {
-        title: 'Trace what can reach it',
-        body: 'Pick a resource and every path to it lights up, like Internet → ALB → ASG → RDS. IAM roles and security groups are explained in plain English.',
+        title: 'Compare two stacks',
+        body: 'Staging against prod, side by side: what only one has, what’s configured differently and what each costs, shown without a verdict. Plan previews and comparisons both write a Markdown summary ready to paste into a pull request.',
       },
       {
-        title: 'A brief, not just a chart',
-        body: 'Executive summary, cost drivers, rule-based findings with fixes (backups, encryption, IMDSv1, open ports) and security posture, as Markdown with a Mermaid diagram or PDF.',
+        title: 'Ways to save, and what moved the bill',
+        body: 'Priced suggestions that remove nothing, like Graviton, gp3, arm64 Lambdas and 1-year reservations, each with its Terraform change. Every apply adds a point to the cost history, with what drove the change.',
       },
       {
-        title: 'Private and deterministic',
-        body: 'Values Terraform marks sensitive never reach the page. The same state and prices give byte-identical Markdown and PDF on any machine.',
+        title: 'Ask your AI assistant',
+        body: 'An MCP server gives Claude Code, Cursor and other assistants ten tools over the same code as the page: cost, findings, resource details, savings, plan previews and comparisons. Sensitive values never appear in its answers.',
       },
       {
-        title: 'Always current',
-        body: 'A terraform wrapper rebuilds the snapshot on every apply, and live mode pushes changes to the page over SSE within a second.',
+        title: 'A brief that stays current',
+        body: 'Executive summary, cost drivers and rule-based findings with fixes, as Markdown or PDF, byte-identical on any machine. A terraform wrapper rebuilds it on every apply, and live mode updates the page over SSE within a second.',
       },
     ],
-    stack: ['TypeScript', 'React', 'React Flow', 'ELK', 'Hono', 'Node.js', 'AWS Price List API'],
+    stack: ['TypeScript', 'React', 'React Flow', 'ELK', 'Hono', 'Node.js', 'MCP', 'AWS Price List API'],
     links: [{ label: 'Source', href: 'https://github.com/hohkokyoung/terraprev' }],
     media: { type: 'video', src: 'media/terraprev-promo.mp4', hd: 'media/terraprev-promo-hd.mp4', poster: 'media/terraprev-poster.jpg', audio: false },
     gallery: {
