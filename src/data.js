@@ -50,7 +50,7 @@ export const work = [
     ],
     stack: ['TypeScript', 'React', 'React Flow', 'ELK', 'Hono', 'Node.js', 'MCP', 'AWS Price List API'],
     links: [{ label: 'Source', href: 'https://github.com/hohkokyoung/terraprev' }],
-    media: { type: 'video', src: 'media/terraprev-promo.mp4', hd: 'media/terraprev-promo-hd.mp4', poster: 'media/terraprev-poster.jpg', audio: false },
+    media: { type: 'video', src: 'media/terraprev-promo.mp4', hd: 'media/terraprev-promo-hd.mp4', poster: 'media/terraprev-poster.jpg', audio: true },
     gallery: {
       device: 'desktop',
       shots: [
