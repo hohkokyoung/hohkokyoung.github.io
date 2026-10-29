@@ -50,7 +50,9 @@ export const work = [
     ],
     stack: ['TypeScript', 'React', 'React Flow', 'ELK', 'Hono', 'Node.js', 'MCP', 'AWS Price List API'],
     links: [{ label: 'Source', href: 'https://github.com/hohkokyoung/terraprev' }],
-    media: { type: 'video', src: 'media/terraprev-promo.mp4', hd: 'media/terraprev-promo-hd.mp4', poster: 'media/terraprev-poster.jpg', audio: true },
+    // ?v= is each file's content hash (sha256, 8 chars): the files keep their names, so a new render needs a new
+    // address or browsers keep playing the cached one. Update it whenever a file is replaced.
+    media: { type: 'video', src: 'media/terraprev-promo.mp4?v=2baff007', hd: 'media/terraprev-promo-hd.mp4?v=9404a94b', poster: 'media/terraprev-poster.jpg?v=bad0024e', audio: true },
     gallery: {
       device: 'desktop',
       shots: [
