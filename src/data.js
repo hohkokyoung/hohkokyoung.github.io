@@ -112,7 +112,7 @@ export const work = [
       { label: 'Source', href: 'https://github.com/hohkokyoung/pokedex-rag' },
       { label: 'Full 2-minute tour', href: 'https://github.com/hohkokyoung/pokedex-rag/blob/main/docs/media/pokerag-tour.mp4' },
     ],
-    media: { type: 'video', src: 'media/pokerag-promo.mp4', hd: 'media/pokerag-promo-hd.mp4', poster: 'media/pokerag-poster.jpg', audio: true },
+    media: { type: 'video', src: 'media/pokerag-promo.mp4?v=16a77575', hd: 'media/pokerag-promo-hd.mp4?v=8db0fbdd', poster: 'media/pokerag-poster.jpg?v=b8e63290', audio: true },
     gallery: {
       device: 'desktop',
       shots: [
@@ -122,7 +122,7 @@ export const work = [
         { src: 'media/pokerag-web-pokedex.jpg', thumb: 'media/pokerag-web-pokedex-thumb.jpg', caption: 'The Pokédex, all 1,025 species' },
         { src: 'media/pokerag-web-team.jpg', thumb: 'media/pokerag-web-team-thumb.jpg', caption: 'A team with its coach and rating' },
         { src: 'media/pokerag-app-pokedex.jpg', caption: 'The Pokédex on iPhone', device: 'phone' },
-        { src: 'media/pokerag-app-garchomp.jpg', caption: 'Garchomp on iPhone', device: 'phone' },
+        { src: 'media/pokerag-app-garchomp.jpg?v=1769d7fe', caption: 'Garchomp on iPhone', device: 'phone' },
         { src: 'media/pokerag-app-team.jpg', caption: 'A team’s report on iPhone', device: 'phone' },
       ],
     },
